@@ -24,3 +24,4 @@ struct Episode {
     var duration: String
     var imageURL: String
 }
+

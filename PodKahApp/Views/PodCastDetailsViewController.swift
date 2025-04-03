@@ -76,3 +76,4 @@ class PodCastDetailsViewController: UIViewController, UITableViewDelegate, UITab
         navigationController?.pushViewController(playerVC, animated: true)
     }
 }
+

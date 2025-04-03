@@ -72,7 +72,6 @@ class PodcastService: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentElement = elementName
         currentText = ""
-        print("==> (attributes): \(attributeDict)")
         let element = qName ?? elementName
         let namespace = namespaceURI ?? ""
         
@@ -83,8 +82,8 @@ class PodcastService: NSObject, XMLParserDelegate {
             }
         case "item":
             isInItem = true
-            currentEpisode = Episode(title: "", description: "",genre: "", audioURL: "", duration: "", imageURL: currentPodcast?.imageURL ?? "")
-        case "enclousure":
+                currentEpisode = Episode(title: "", description: "", genre: "", audioURL: "", duration: "", imageURL: currentPodcast?.imageURL ?? "")
+        case "enclosure":
             if isInItem, let audioURL = attributeDict["url"] {
                 currentEpisode?.audioURL = audioURL
             }
@@ -102,14 +101,14 @@ class PodcastService: NSObject, XMLParserDelegate {
             currentElement = "author"
         case "itunes:summary":
             currentElement = "summary"
-        case "itunes:category":
-            if let category = attributeDict["text"] {
-                if isInItem {
-                    currentEpisode?.genre = category
-                } else {
-                    currentPodcast?.genre = category
+        case "itunes:category", "category":
+                if let category = attributeDict["text"] {
+                    if isInItem {
+                        currentEpisode?.genre = category
+                    } else {
+                        currentPodcast?.genre = category
+                    }
                 }
-            }
         default:
             break
         }
