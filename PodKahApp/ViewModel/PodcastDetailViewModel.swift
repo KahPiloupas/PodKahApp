@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+class PodcastDetailViewModel {
+    
+    private var podcast: Podcast
+    
+    init(podcast: Podcast) {
+        self.podcast = podcast
+    }
+    
+    func getPodcastDetails() -> Podcast {
+        return podcast
+    }
+}
